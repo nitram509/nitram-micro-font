@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="author" content="Martin W. Kirst (@nitram509)">
+  <meta name="application-name" content="Nitram509 Micro Font 5x5">
+  <title>Nitram509's Micro Font 5x5</title>
+  <script type="text/javascript" src="nitram-micro-mono.js"></script>
+  <style type="text/css">
+    * {
+      font-family: monospace;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    h2 {
+      font-weight: 800;
+      padding: 5px;
+      background: #e0e0e0;
+    }
+
+    #micro-font-sample-500 {
+      cursor: crosshair;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Nitram509's Micro Font 5x5</h1>
+
+<p>
+  Most similar to <a href="http://de.wikipedia.org/wiki/Codepage_437">Codepage 437</a>,
+  which was used in Germany back in the MS-DOS days.
+</p>
+
+<h2>The quick brown fox</h2>
+
+<p>
+  <canvas id="quick-brown-fox" width="700" height="16">
+    Please, use a modern browser which supports HTML5 Canvas.
+  </canvas>
+</p>
+
+<p>
+  <canvas id="falsches-ueben" width="700" height="16">
+    Please, use a modern browser which supports HTML5 Canvas.
+  </canvas>
+</p>
+
+<h2>Zoom 100%</h2>
+
+<p>
+  <canvas id="micro-font-sample-100" width="96" height="96">
+    Please, use a modern browser which supports HTML5 Canvas.
+  </canvas>
+</p>
+
+<h2>Zoom 200%</h2>
+
+<p>
+  <canvas id="micro-font-sample-200" width="176" height="176">
+    Please, use a modern browser which supports HTML5 Canvas.
+  </canvas>
+</p>
+
+<h2>Zoom 500%</h2>
+
+<p>
+
+<div style="font-size: 22px;padding-left: 8px;">
+  <span style="text-decoration: underline">0 1 2 3 4 5 6 7 8 9 A B C D E F</span>
+  &nbsp;&nbsp;
+  <label for="codepoint">Codepoint: </label>
+  <span id="codepoint" style="text-decoration: underline"></span>
+</div>
+<canvas id="micro-font-sample-500" width="428" height="428" onclick="onCanvas500Click(event)">
+  Please, use a modern browser which supports HTML5 Canvas.
+</canvas>
+</p>
+
+<script type="text/javascript">
+  function onCanvas500Click(event) {
+    var codepointElement = document.getElementById('codepoint');
+    var x = event.offsetX;
+    var y = event.offsetY;
+    var hex = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F', '?'];
+    codepointElement.textContent = "" + hex[Math.floor(y / 26)] + hex[Math.floor(x / 26)];
+  }
+</script>
+
+<script type="text/javascript">
+  function drawMicroFont_100percent_putPixel_like(canvas) {
+    var context = canvas.getContext("2d");
+    for (var c = 0; c < Micro_Font_5x5.length / 5; c++) {
+      var charImageData = context.createImageData(5, 5);
+      var img = charImageData.data
+      for (var y = 0; y < 5; y++) {
+        for (var x = 0; x < 5; x++) {
+          if ((Micro_Font_5x5[c * 5 + y] & (1 << x)) == (1 << x)) {
+            var offs = y * 5 + x;
+            img[offs * 4 + 0] = 0;
+            img[offs * 4 + 1] = 0;
+            img[offs * 4 + 2] = 0;
+            img[offs * 4 + 3] = 255;
+          }
+        }
+      }
+      context.putImageData(charImageData, (c % 16) * 6, 6 * Math.floor(c / 16));
+    }
+  }
+
+  function drawMicroFont_200percent_using_rectangles(canvas) {
+    var context = canvas.getContext("2d");
+    context.save();
+    context.fillStyle = '#000';
+    for (var c = 0; c < Micro_Font_5x5.length / 5; c++) {
+      for (var y = 0; y < 5; y++) {
+        for (var x = 0; x < 5; x++) {
+          if ((Micro_Font_5x5[c * 5 + y] & (1 << x)) == (1 << x)) {
+            var dx = (c % 16) * 11;
+            var dy = 11 * Math.floor(c / 16);
+            context.fillRect(dx + x * 2, dy + y * 2, 2, 2);
+          }
+        }
+      }
+    }
+    context.restore();
+  }
+
+  function drawCharacter(canvas, whereX, whereY, aChar) {
+    var context = canvas.getContext("2d");
+    var c = aChar | 0;
+    if (typeof aChar == 'string' && aChar.length > 0) {
+      c = aChar.charCodeAt(0);
+    }
+    context.save();
+    context.fillStyle = '#000';
+    for (var y = 0; y < 5; y++) {
+      for (var x = 0; x < 5; x++) {
+        if ((Micro_Font_5x5[c * 5 + y] & (1 << x)) == (1 << x)) {
+          var dx = 11 * whereX;
+          var dy = 11 * whereY;
+          context.fillRect(dx + x * 2, dy + y * 2, 2, 2);
+        }
+      }
+    }
+    context.restore();
+  }
+
+  function draw_quick_brown_fox(canvas) {
+    var s = "The quick brown fox jumps over the lazy dog";
+    for (var i=0; i< s.length; i++) {
+      drawCharacter(canvas, i, 0, s.charAt(i));
+    }
+  }
+
+  function draw_falches_ueben(canvas) {
+    var s = "Falsches \x81ben von Xylophonmusik qu\x84lt jeden gr\x94\xE1eren Zwerg";
+    for (var i=0; i< s.length; i++) {
+      drawCharacter(canvas, i, 0, s.charAt(i));
+    }
+  }
+
+  function drawMicroFont_500percent_using_scaling(canvas) {
+    var context = canvas.getContext("2d");
+    context.save();
+    context.scale(4.5, 4.5);
+    context.fillStyle = '#000';
+    for (var c = 0; c < Micro_Font_5x5.length / 5; c++) {
+      for (var y = 0; y < 5; y++) {
+        for (var x = 0; x < 5; x++) {
+          if ((Micro_Font_5x5[c * 5 + y] & (1 << x)) == (1 << x)) {
+            var dx = (c % 16) * 6;
+            var dy = 6 * Math.floor(c / 16);
+            context.fillRect(dx + x, dy + y, 1, 1);
+          }
+        }
+      }
+    }
+    context.restore();
+  }
+</script>
+
+<script type="text/javascript">
+  (function () {
+    var canvas = document.getElementById('micro-font-sample-100');
+    if (canvas.getContext) {
+      drawMicroFont_100percent_putPixel_like(canvas);
+    }
+
+    canvas = document.getElementById('micro-font-sample-200');
+    if (canvas.getContext) {
+      drawMicroFont_200percent_using_rectangles(canvas);
+    }
+
+    canvas = document.getElementById('micro-font-sample-500');
+    if (canvas.getContext) {
+      drawMicroFont_500percent_using_scaling(canvas);
+    }
+
+    canvas = document.getElementById('quick-brown-fox');
+    if (canvas.getContext) {
+      draw_quick_brown_fox(canvas);
+    }
+
+    canvas = document.getElementById('falsches-ueben');
+    if (canvas.getContext) {
+      draw_falches_ueben(canvas);
+    }
+  })();
+</script>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-48819454-2']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+</body>
+</html>
