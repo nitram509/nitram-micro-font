@@ -71,36 +71,33 @@ It heavily relies on BDF field ```ENCODING```, which refers to a Adobe's standar
 According to BDF spec's this could be "-1", if no match to Adobe's standard encoding exists.
 But, some converter tools don't accept this "-1" placeholder.
 
-## Tools for converting
 
-https://github.com/koron/bdf2ttf
+## How to convert font files
 
-***Status*** 
+### BDF itself
+
+Using gbdfed and python 2.7+
+
+1. ```python convert2bdf.py```
+2. ```gbdfed nitram-micro-mono-cp1252.bdf``` -- just open ans save again ... applies some optimizations
+3. ```gbdfed nitram-micro-mono-unicode.bdf``` -- just open ans save again ... applies some optimizations
+
+### BDF => TTF
+
+Using https://github.com/koron/bdf2ttf.git
+
 **This is a known issue.**
 I've tried a couple of times to use it, but without success yet.
 At least it doesnt crash, but the convered .TTF file is not showing anything.
 
+1. ```bdf2ttf nitram-micro-mono-cp1252.ttf nitram-micro-mono.ttf.ini nitram-micro-mono-cp1252.bdf```
 
-## How to convert from source byte array to BDF file
 
-### required tools
-
-* gbdfed
-* python 2.7+
-* bdf2ttf
-
-### convert process
-
-1. run convert2bdf.py
-2. open Micro_Font_5x5.bdf in gbdfed
-3. just save file again (applies some optimization)
-4. run ```bdf2ttf Micro_Font_5x5.ttf Micro_Font_5x5.ttf.ini Micro_Font_5x5.bdf```       <<== NOT working yet!
-
-#### BDF => FNT/FON
+### BDF => FNT/FON
 
 Using https://github.com/sunaku/bdf2fon.git
 
 ***Status*** untested
 
-1. bdf2fnt nitram-micro-mono-cp1252.bdf nitram-micro-mono-cp1252.fnt 
-2. fnt2fon nitram-micro-mono-cp1252.fnt nitram-micro-mono-cp1252.fon
+1. ```bdf2fnt nitram-micro-mono-cp1252.bdf nitram-micro-mono-cp1252.fnt```
+2. ```fnt2fon nitram-micro-mono-cp1252.fnt nitram-micro-mono-cp1252.fon```
