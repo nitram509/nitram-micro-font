@@ -1,7 +1,7 @@
 
-public class Micro_Font_5x5 {
+public class nitram_micro_mono {
 
-  public static byte[] fontData = new byte[] {
+  public static byte[] fontData_CP437 = new byte[] {
     0, 0, 0, 0, 0,
     10, 0, 4, 17, 14,
     10, 0, 0, 14, 17,

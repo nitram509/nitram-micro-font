@@ -95,12 +95,12 @@
     var context = canvas.getContext("2d");
     for (var c = 0; c < Micro_Font_5x5.length / 5; c++) {
       var charImageData = context.createImageData(5, 5);
-      var img = charImageData.data
+      var img = charImageData.data;
       for (var y = 0; y < 5; y++) {
         for (var x = 0; x < 5; x++) {
           if ((Micro_Font_5x5[c * 5 + y] & (1 << x)) == (1 << x)) {
             var offs = y * 5 + x;
-            img[offs * 4 + 0] = 0;
+            img[offs * 4]     = 0;
             img[offs * 4 + 1] = 0;
             img[offs * 4 + 2] = 0;
             img[offs * 4 + 3] = 255;

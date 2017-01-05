@@ -1,4 +1,4 @@
-var Micro_Font_5x5 = [
+var nitram_micro_mono_CP437 = [
   0, 0, 0, 0, 0,
   10, 0, 4, 17, 14,
   10, 0, 0, 14, 17,
