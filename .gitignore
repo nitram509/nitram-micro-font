@@ -2,3 +2,4 @@
 *.iml
 **/bower_components/*
 .DS_Store
+*.bak
