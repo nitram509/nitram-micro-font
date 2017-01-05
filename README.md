@@ -21,13 +21,16 @@ code page and suitable for drawing [ASCII art](https://en.wikipedia.org/wiki/ASC
 
 This font comes in various formats.
 
-* ```nitram_micro_mono.dat``` is the historical source of this font, which I've created using some self coded tools (using Turbo Pascal) 
+* ```nitram_micro_mono.dat``` is the historical source of this font, which I've created using some self coded tools (using Turbo Pascal)
+   * pretty mutch matches the CP4437 code page, and extends some custom symbols
 * ```nitram-micro-mono-unicode.bdf``` is a Adobe Glyph Bitmap Distribution Format (BDF) file, generated from the source
    * use this, if you want to edit or convert into a format, suitable for existing applications (e.g. terminal font, etc.)
    * character name and character encoding refer to Unicode code points
+   * preserves all known characters from CP437
 * ```nitram-micro-mono-cp1252.bdf``` is a Adobe Glyph Bitmap Distribution Format (BDF) file, generated from the source
    * use this, if you want to edit or convert into a format, suitable for existing applications (e.g. terminal font, etc.)
    * character name and character encoding refer to CP1252 code points
+   * preserves just two handful extra characters from CP437, e.g. German umlauts 
 * ```sources``` folder contains source files in various programming languages, which contain a bit array representation of the font
    * use these, if you want to use this font in your coding projects
    * these files where generated from the .DAT source file
@@ -44,7 +47,7 @@ function drawMicroFont_100percent_putPixel_like(canvas) {
     var img = charImageData.data;
     for (var y = 0; y < 5; y++) {
       for (var x = 0; x < 5; x++) {
-        if ((Micro_Font_5x5[c * 5 + y] & (1 << x)) == (1 << x)) {
+        if ((nitram_micro_mono_CP437[c * 5 + y] & (1 << x)) == (1 << x)) {
           var offs = y * 5 + x;
           img[offs * 4]     = 0;
           img[offs * 4 + 1] = 0;
@@ -92,3 +95,12 @@ At least it doesnt crash, but the convered .TTF file is not showing anything.
 2. open Micro_Font_5x5.bdf in gbdfed
 3. just save file again (applies some optimization)
 4. run ```bdf2ttf Micro_Font_5x5.ttf Micro_Font_5x5.ttf.ini Micro_Font_5x5.bdf```       <<== NOT working yet!
+
+#### BDF => FNT/FON
+
+Using https://github.com/sunaku/bdf2fon.git
+
+***Status*** untested
+
+1. bdf2fnt nitram-micro-mono-cp1252.bdf nitram-micro-mono-cp1252.fnt 
+2. fnt2fon nitram-micro-mono-cp1252.fnt nitram-micro-mono-cp1252.fon
