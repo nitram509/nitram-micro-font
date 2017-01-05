@@ -3,6 +3,7 @@
 
 from sources.nitram_micro_mono import nitram_micro_mono_CP437
 
+
 class BdfCharacter:
     def __init__(self, code_point, bitmap_array):
         self.code_point = code_point
@@ -84,16 +85,18 @@ class BdfWriter:
         self.bdf_file.write(self.__BDF_NEW_LINE_SEPARATOR)
 
 
-def create_char(idx):
+def create_unicode_char(idx):
     unicode_char = unicode(chr(idx), encoding='CP437', errors='strict')
     uni_code_point = ord(unicode_char)
-    cp1252_char = unicode_char.encode(encoding='CP1252', errors='ignore')
-    if len(cp1252_char) > 0:
-        cp1252_code_point = ord(cp1252_char)
-        print "[INFO] idx=%.2x --> (uni)codepoint=%.4x --> CP1252 codepoint=%.2x" % (idx, uni_code_point, cp1252_code_point)
-    else:
-        print "[INFO] idx=%.2x --> (uni)codepoint=%.4x" % (idx, uni_code_point)
+    print "[DEBUG] idx=%.2x --> (uni)codepoint=%.4x" % (idx, uni_code_point)
     return BdfCharacter(uni_code_point, nitram_micro_mono_CP437[5 * idx:5 * idx + 5])
+
+def create_cp1252_char(idx):
+    unicode_char = unicode(chr(idx), encoding='CP437', errors='strict')
+    cp1252_char = unicode_char.encode(encoding='CP1252', errors='strict')
+    cp1252_code_point = ord(cp1252_char)
+    print "[DEBUG] idx=%.2x --> CP1252 codepoint=%.2x" % (idx, cp1252_code_point)
+    return BdfCharacter(cp1252_code_point, nitram_micro_mono_CP437[5 * idx:5 * idx + 5])
 
 
 def is_char_defined(idx):
@@ -164,11 +167,34 @@ def is_char_defined(idx):
     return idx not in black_list
 
 
-if __name__ == '__main__':
-    bdf_writer = BdfWriter('nitram-micro-mono.bdf')
+def is_char_available_in_cp1252(idx):
+    unicode_char = unicode(chr(idx), encoding='CP437', errors='strict')
+    cp1252_char = unicode_char.encode(encoding='CP1252', errors='ignore')
+    return len(cp1252_char)
+
+
+def create_unicode_BDF_file():
+    print "[INFO] create nitram-micro-mono-unicode.bdf ..."
+    bdf_writer = BdfWriter('nitram-micro-mono-unicode.bdf')
     bdf_writer.write_header()
     for i in xrange(len(nitram_micro_mono_CP437) / 5):
         if is_char_defined(i):
-            bdf_writer.add_char(create_char(i))
+            bdf_writer.add_char(create_unicode_char(i))
     bdf_writer.write_chars()
     bdf_writer.close()
+
+
+def create_CP1252_BDF_file():
+    print "[INFO] create nitram-micro-mono-cp1252.bdf ..."
+    bdf_writer = BdfWriter('nitram-micro-mono-cp1252.bdf')
+    bdf_writer.write_header()
+    for i in xrange(len(nitram_micro_mono_CP437) / 5):
+        if is_char_defined(i) and is_char_available_in_cp1252(i):
+            bdf_writer.add_char(create_cp1252_char(i))
+    bdf_writer.write_chars()
+    bdf_writer.close()
+
+
+if __name__ == '__main__':
+    create_unicode_BDF_file()
+    create_CP1252_BDF_file()
