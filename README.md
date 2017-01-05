@@ -36,7 +36,7 @@ This is a naive Javascript implementation, rendering pixel by pixel on a HTML5 c
 ```javascript
 function drawMicroFont_100percent_putPixel_like(canvas) {
   var context = canvas.getContext("2d");
-  for (var c = 0; c < Micro_Font_5x5.length / 5; c++) {
+  for (var c = 0; c < nitram_micro_mono_CP437.length / 5; c++) {
     var charImageData = context.createImageData(5, 5);
     var img = charImageData.data;
     for (var y = 0; y < 5; y++) {

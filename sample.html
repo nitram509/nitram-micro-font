@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="author" content="Martin W. Kirst (@nitram509)">
-  <meta name="application-name" content="Nitram509 Micro Font 5x5">
-  <title>Nitram509's Micro Font 5x5</title>
-  <script type="text/javascript" src="nitram-micro-mono.js"></script>
+  <meta name="application-name" content="Nitram509 Micro Mono font">
+  <title>Nitram509's Micro Mono font</title>
+  <script type="text/javascript" src="sources/nitram_micro_mono.js"></script>
   <style type="text/css">
     * {
       font-family: monospace;
@@ -93,12 +93,12 @@
 <script type="text/javascript">
   function drawMicroFont_100percent_putPixel_like(canvas) {
     var context = canvas.getContext("2d");
-    for (var c = 0; c < Micro_Font_5x5.length / 5; c++) {
+    for (var c = 0; c < nitram_micro_mono_CP437.length / 5; c++) {
       var charImageData = context.createImageData(5, 5);
       var img = charImageData.data;
       for (var y = 0; y < 5; y++) {
         for (var x = 0; x < 5; x++) {
-          if ((Micro_Font_5x5[c * 5 + y] & (1 << x)) == (1 << x)) {
+          if ((nitram_micro_mono_CP437[c * 5 + y] & (1 << x)) == (1 << x)) {
             var offs = y * 5 + x;
             img[offs * 4]     = 0;
             img[offs * 4 + 1] = 0;
@@ -115,10 +115,10 @@
     var context = canvas.getContext("2d");
     context.save();
     context.fillStyle = '#000';
-    for (var c = 0; c < Micro_Font_5x5.length / 5; c++) {
+    for (var c = 0; c < nitram_micro_mono_CP437.length / 5; c++) {
       for (var y = 0; y < 5; y++) {
         for (var x = 0; x < 5; x++) {
-          if ((Micro_Font_5x5[c * 5 + y] & (1 << x)) == (1 << x)) {
+          if ((nitram_micro_mono_CP437[c * 5 + y] & (1 << x)) == (1 << x)) {
             var dx = (c % 16) * 11;
             var dy = 11 * Math.floor(c / 16);
             context.fillRect(dx + x * 2, dy + y * 2, 2, 2);
@@ -139,7 +139,7 @@
     context.fillStyle = '#000';
     for (var y = 0; y < 5; y++) {
       for (var x = 0; x < 5; x++) {
-        if ((Micro_Font_5x5[c * 5 + y] & (1 << x)) == (1 << x)) {
+        if ((nitram_micro_mono_CP437[c * 5 + y] & (1 << x)) == (1 << x)) {
           var dx = 11 * whereX;
           var dy = 11 * whereY;
           context.fillRect(dx + x * 2, dy + y * 2, 2, 2);
@@ -168,10 +168,10 @@
     context.save();
     context.scale(4.5, 4.5);
     context.fillStyle = '#000';
-    for (var c = 0; c < Micro_Font_5x5.length / 5; c++) {
+    for (var c = 0; c < nitram_micro_mono_CP437.length / 5; c++) {
       for (var y = 0; y < 5; y++) {
         for (var x = 0; x < 5; x++) {
-          if ((Micro_Font_5x5[c * 5 + y] & (1 << x)) == (1 << x)) {
+          if ((nitram_micro_mono_CP437[c * 5 + y] & (1 << x)) == (1 << x)) {
             var dx = (c % 16) * 6;
             var dy = 6 * Math.floor(c / 16);
             context.fillRect(dx + x, dy + y, 1, 1);
