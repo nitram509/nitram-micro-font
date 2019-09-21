@@ -22,15 +22,15 @@ code page and suitable for drawing [ASCII art](https://en.wikipedia.org/wiki/ASC
 This font comes in various formats.
 
 * ```nitram_micro_mono.dat``` is the historical source of this font, which I've created using some self coded tools (using Turbo Pascal)
-   * pretty mutch matches the CP4437 code page, and extends some custom symbols
+   * pretty mutch matches the [CP437](https://en.wikipedia.org/wiki/Code_page_437) code page, and extends some custom symbols
 * ```nitram-micro-mono-unicode.bdf``` is a Adobe Glyph Bitmap Distribution Format (BDF) file, generated from the source
    * use this, if you want to edit or convert into a format, suitable for existing applications (e.g. terminal font, etc.)
    * character name and character encoding refer to Unicode code points
-   * preserves all known characters from CP437
+   * preserves all known characters from [CP437](https://en.wikipedia.org/wiki/Code_page_437)
 * ```nitram-micro-mono-cp1252.bdf``` is a Adobe Glyph Bitmap Distribution Format (BDF) file, generated from the source
    * use this, if you want to edit or convert into a format, suitable for existing applications (e.g. terminal font, etc.)
-   * character name and character encoding refer to CP1252 code points
-   * preserves just two handful extra characters from CP437, e.g. German umlauts 
+   * character name and character encoding refer to [CP1252](https://en.wikipedia.org/wiki/Windows-1252) code points
+   * preserves just two handful extra characters from [CP437](https://en.wikipedia.org/wiki/Code_page_437), e.g. German umlauts 
 * ```sources``` folder contains source files in various programming languages, which contain a bit array representation of the font
    * use these, if you want to use this font in your coding projects
    * these files where generated from the .DAT source file
