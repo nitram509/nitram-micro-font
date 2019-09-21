@@ -65,7 +65,6 @@ function drawMicroFont_100percent_putPixel_like(canvas) {
 
 https://www.math.nmsu.edu/~mleisher/Software/gbdfed/
 
-***Status***
 Great tool for editing the font.
 It heavily relies on BDF field ```ENCODING```, which refers to a Adobe's standard encoding.
 According to BDF spec's this could be "-1", if no match to Adobe's standard encoding exists.
@@ -79,8 +78,8 @@ But, some converter tools don't accept this "-1" placeholder.
 Using gbdfed and python 2.7+
 
 1. ```python convert2bdf.py```
-2. ```gbdfed nitram-micro-mono-cp1252.bdf``` -- just open ans save again ... applies some optimizations
-3. ```gbdfed nitram-micro-mono-unicode.bdf``` -- just open ans save again ... applies some optimizations
+2. ```gbdfed nitram-micro-mono-cp1252.bdf``` -- just open and save again ... applies some optimizations
+3. ```gbdfed nitram-micro-mono-unicode.bdf``` -- just open and save again ... applies some optimizations
 
 ### BDF => TTF
 
