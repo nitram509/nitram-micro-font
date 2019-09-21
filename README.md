@@ -33,7 +33,13 @@ This font comes in various formats.
    * preserves just two handful extra characters from [CP437](https://en.wikipedia.org/wiki/Code_page_437), e.g. German umlauts 
 * ```sources``` folder contains source files in various programming languages, which contain a bit array representation of the font
    * use these, if you want to use this font in your coding projects
+      * C# [nitram_micro_mono.cs](/sources/nitram_micro_mono.cs)
+      * Java [nitram_micro_mono.java](/sources/nitram_micro_mono.java)
+      * Javascript [nitram_micro_mono.js](/sources/nitram_micro_mono.js)
+      * Python [nitram_micro_mono.py](/sources/nitram_micro_mono.py)
    * these files where generated from the .DAT source file
+      * JSON [nitram_micro_mono.json](/sources/nitram_micro_mono.json)
+      * Raw data [nitram_micro_mono.dat](/nitram_micro_mono.dat)
 
 ## How to render
 
