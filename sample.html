@@ -68,17 +68,36 @@
 <h2>Zoom 500%</h2>
 
 <p>
+  Hint: characters highlighted in red do differ from CP437 standard.
+</p>
 
-<div style="font-size: 22px;padding-left: 8px;">
+<div style="font-size: 22px;padding-left: 26px;color: darkgray;">
   <span style="text-decoration: underline">0 1 2 3 4 5 6 7 8 9 A B C D E F</span>
   &nbsp;&nbsp;
   <label for="codepoint">Codepoint: </label>
   <span id="codepoint" style="text-decoration: underline"></span>
 </div>
+<div style="font-size: 22px;margin-right: 6px; width: 9px; float: left; line-height: 27px; color: darkgray;">
+  0<br/>
+  1<br/>
+  2<br/>
+  3<br/>
+  4<br/>
+  5<br/>
+  6<br/>
+  7<br/>
+  8<br/>
+  9<br/>
+  A<br/>
+  B<br/>
+  C<br/>
+  D<br/>
+  E<br/>
+  F<br/>
+</div>
 <canvas id="micro-font-sample-500" width="428" height="428" onclick="onCanvas500Click(event)">
   Please, use a modern browser which supports HTML5 Canvas.
 </canvas>
-</p>
 
 <script type="text/javascript">
   function onCanvas500Click(event) {
@@ -116,11 +135,11 @@
     context.save();
     context.fillStyle = '#000';
     for (var c = 0; c < nitram_micro_mono_CP437.length / 5; c++) {
+      var dx = (c % 16) * 11;
+      var dy = 11 * Math.floor(c / 16);
       for (var y = 0; y < 5; y++) {
         for (var x = 0; x < 5; x++) {
           if ((nitram_micro_mono_CP437[c * 5 + y] & (1 << x)) == (1 << x)) {
-            var dx = (c % 16) * 11;
-            var dy = 11 * Math.floor(c / 16);
             context.fillRect(dx + x * 2, dy + y * 2, 2, 2);
           }
         }
@@ -132,6 +151,8 @@
   function drawCharacter(canvas, whereX, whereY, aChar) {
     var context = canvas.getContext("2d");
     var c = aChar | 0;
+    var dx = 11 * whereX;
+    var dy = 11 * whereY;
     if (typeof aChar == 'string' && aChar.length > 0) {
       c = aChar.charCodeAt(0);
     }
@@ -140,8 +161,6 @@
     for (var y = 0; y < 5; y++) {
       for (var x = 0; x < 5; x++) {
         if ((nitram_micro_mono_CP437[c * 5 + y] & (1 << x)) == (1 << x)) {
-          var dx = 11 * whereX;
-          var dy = 11 * whereY;
           context.fillRect(dx + x * 2, dy + y * 2, 2, 2);
         }
       }
@@ -167,13 +186,87 @@
     var context = canvas.getContext("2d");
     context.save();
     context.scale(4.5, 4.5);
-    context.fillStyle = '#000';
+    var different_from_standard_map = [];
+    different_from_standard_map.fill(false, 0, 256);
+    different_from_standard_map[0] = true;
+    different_from_standard_map[2] = true;
+    different_from_standard_map[4] = true;
+    different_from_standard_map[8] = true;
+    different_from_standard_map[0xa] = true;
+    different_from_standard_map[0xc] = true;
+    different_from_standard_map[0xd] = true;
+    different_from_standard_map[0x14] = true;
+    different_from_standard_map[0x15] = true;
+    different_from_standard_map[0x17] = true;
+    different_from_standard_map[0x1d] = true;
+    different_from_standard_map[0x80] = true;
+    different_from_standard_map[0x82] = true;
+    different_from_standard_map[0x83] = true;
+    different_from_standard_map[0x85] = true;
+    different_from_standard_map[0x86] = true;
+    different_from_standard_map[0x87] = true;
+    different_from_standard_map[0x88] = true;
+    different_from_standard_map[0x89] = true;
+    different_from_standard_map[0x8a] = true;
+    different_from_standard_map[0x8b] = true;
+    different_from_standard_map[0x8c] = true;
+    different_from_standard_map[0x8d] = true;
+    different_from_standard_map[0x8f] = true;
+    different_from_standard_map[0x90] = true;
+    different_from_standard_map[0x91] = true;
+    different_from_standard_map[0x92] = true;
+    different_from_standard_map[0x93] = true;
+    different_from_standard_map[0x95] = true;
+    different_from_standard_map[0x96] = true;
+    different_from_standard_map[0x97] = true;
+    different_from_standard_map[0x98] = true;
+    different_from_standard_map[0x9b] = true;
+    different_from_standard_map[0x9c] = true;
+    different_from_standard_map[0x9d] = true;
+    different_from_standard_map[0x9e] = true;
+    different_from_standard_map[0x9f] = true;
+    different_from_standard_map[0xa0] = true;
+    different_from_standard_map[0xa1] = true;
+    different_from_standard_map[0xa2] = true;
+    different_from_standard_map[0xa3] = true;
+    different_from_standard_map[0xa4] = true;
+    different_from_standard_map[0xa5] = true;
+    different_from_standard_map[0xa6] = true;
+    different_from_standard_map[0xa7] = true;
+    different_from_standard_map[0xab] = true;
+    different_from_standard_map[0xac] = true;
+    different_from_standard_map[0xe0] = true;
+    different_from_standard_map[0xe2] = true;
+    different_from_standard_map[0xe3] = true;
+    different_from_standard_map[0xe4] = true;
+    different_from_standard_map[0xe5] = true;
+    different_from_standard_map[0xe6] = true;
+    different_from_standard_map[0xe7] = true;
+    different_from_standard_map[0xe8] = true;
+    different_from_standard_map[0xe9] = true;
+    different_from_standard_map[0xea] = true;
+    different_from_standard_map[0xeb] = true;
+    different_from_standard_map[0xec] = true;
+    different_from_standard_map[0xf8] = true;
+    different_from_standard_map[0xf9] = true;
+    different_from_standard_map[0xfa] = true;
+    different_from_standard_map[0xfc] = true;
+    different_from_standard_map[0xfd] = true;
+    different_from_standard_map[0xfe] = true;
+    
     for (var c = 0; c < nitram_micro_mono_CP437.length / 5; c++) {
+      var dx = (c % 16) * 6;
+      var dy = 6 * Math.floor(c / 16);
+      // highlight background, if characte is non-standard CP437
+      if (different_from_standard_map[c]) {
+        context.fillStyle = '#ffcccc';
+        context.fillRect(dx, dy, 5, 5);
+      }
+      // draw pixel by pixel
+      context.fillStyle = '#000';
       for (var y = 0; y < 5; y++) {
         for (var x = 0; x < 5; x++) {
           if ((nitram_micro_mono_CP437[c * 5 + y] & (1 << x)) == (1 << x)) {
-            var dx = (c % 16) * 6;
-            var dy = 6 * Math.floor(c / 16);
             context.fillRect(dx + x, dy + y, 1, 1);
           }
         }
@@ -183,6 +276,54 @@
   }
 </script>
 
+<script type="text/javascript">
+  // Polyfill, Array.fill()
+  // Source: https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Global_Objects/Array/fill
+  if (!Array.prototype.fill) {
+  Object.defineProperty(Array.prototype, 'fill', {
+    value: function(value) {
+
+      // Steps 1-2.
+      if (this == null) {
+        throw new TypeError('this is null or not defined');
+      }
+
+      var O = Object(this);
+
+      // Steps 3-5.
+      var len = O.length >>> 0;
+
+      // Steps 6-7.
+      var start = arguments[1];
+      var relativeStart = start >> 0;
+
+      // Step 8.
+      var k = relativeStart < 0 ?
+        Math.max(len + relativeStart, 0) :
+        Math.min(relativeStart, len);
+
+      // Steps 9-10.
+      var end = arguments[2];
+      var relativeEnd = end === undefined ?
+        len : end >> 0;
+
+      // Step 11.
+      var final = relativeEnd < 0 ?
+        Math.max(len + relativeEnd, 0) :
+        Math.min(relativeEnd, len);
+
+      // Step 12.
+      while (k < final) {
+        O[k] = value;
+        k++;
+      }
+
+      // Step 13.
+      return O;
+    }
+  });
+}
+</script>
 <script type="text/javascript">
   (function () {
     var canvas = document.getElementById('micro-font-sample-100');

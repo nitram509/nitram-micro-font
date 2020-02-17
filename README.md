@@ -12,6 +12,12 @@ code page and suitable for drawing [ASCII art](https://en.wikipedia.org/wiki/ASC
 
 ![Sample: all characters](/sample.png?raw=true)
 
+### Difference to the CP 437 standard
+
+Non-standard characters are highlighted in red.
+
+![Sample: all characters](/standard_difference.png?raw=true)
+
 ## License
 
 [MIT](https://opensource.org/licenses/MIT)
