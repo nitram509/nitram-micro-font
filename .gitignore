@@ -3,3 +3,4 @@
 **/bower_components/*
 .DS_Store
 *.bak
+__pycache__/
