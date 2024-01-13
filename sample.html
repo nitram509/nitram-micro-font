@@ -117,7 +117,7 @@
       var img = charImageData.data;
       for (var y = 0; y < 5; y++) {
         for (var x = 0; x < 5; x++) {
-          if ((nitram_micro_mono_CP437[c * 5 + y] & (1 << x)) == (1 << x)) {
+          if ((nitram_micro_mono_CP437[c * 5 + y] & (1 << x)) === (1 << x)) {
             var offs = y * 5 + x;
             img[offs * 4]     = 0;
             img[offs * 4 + 1] = 0;
@@ -139,7 +139,7 @@
       var dy = 11 * Math.floor(c / 16);
       for (var y = 0; y < 5; y++) {
         for (var x = 0; x < 5; x++) {
-          if ((nitram_micro_mono_CP437[c * 5 + y] & (1 << x)) == (1 << x)) {
+          if ((nitram_micro_mono_CP437[c * 5 + y] & (1 << x)) === (1 << x)) {
             context.fillRect(dx + x * 2, dy + y * 2, 2, 2);
           }
         }
@@ -160,7 +160,7 @@
     context.fillStyle = '#000';
     for (var y = 0; y < 5; y++) {
       for (var x = 0; x < 5; x++) {
-        if ((nitram_micro_mono_CP437[c * 5 + y] & (1 << x)) == (1 << x)) {
+        if ((nitram_micro_mono_CP437[c * 5 + y] & (1 << x)) === (1 << x)) {
           context.fillRect(dx + x * 2, dy + y * 2, 2, 2);
         }
       }
@@ -264,7 +264,7 @@
       context.fillStyle = '#000';
       for (var y = 0; y < 5; y++) {
         for (var x = 0; x < 5; x++) {
-          if ((nitram_micro_mono_CP437[c * 5 + y] & (1 << x)) == (1 << x)) {
+          if ((nitram_micro_mono_CP437[c * 5 + y] & (1 << x)) === (1 << x)) {
             context.fillRect(dx + x, dy + y, 1, 1);
           }
         }
