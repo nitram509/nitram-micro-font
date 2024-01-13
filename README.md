@@ -5,18 +5,18 @@ A custom pixel/bitmap based font which only needs 5x5 pixel per character.
 I've used it in some older projects, back in the MS-DOS days ...
 Remember when your screen resolution was only 320x200 pixel in total ;-)
 
-![Sample: The quick brown fox jumps over the lazy dog](/the_quick_brown_fox_jumps_over_the_lazy_dog.png?raw=true)
+![Sample: The quick brown fox jumps over the lazy dog](./the_quick_brown_fox_jumps_over_the_lazy_dog.png?raw=true)
 
 It's source is in [CP437](https://en.wikipedia.org/wiki/Code_page_437)
 code page and suitable for drawing [ASCII art](https://en.wikipedia.org/wiki/ASCII_art) ;-)
 
-![Sample: all characters](/sample.png?raw=true)
+![Sample: all characters](./sample.png?raw=true)
 
 ### Difference to the CP 437 standard
 
 Non-standard characters are highlighted in red.
 
-![Sample: all characters](/standard_difference.png?raw=true)
+![Sample: all characters](./standard_difference.png?raw=true)
 
 ## License
 
@@ -87,7 +87,7 @@ But, some converter tools don't accept this "-1" placeholder.
 
 ### BDF itself
 
-Using gbdfed and python 2.7+
+Using gbdfed and python 3.8+
 
 1. ```python convert2bdf.py```
 2. ```gbdfed nitram-micro-mono-cp1252.bdf``` -- just open and save again ... applies some optimizations
@@ -99,7 +99,7 @@ Using https://github.com/koron/bdf2ttf.git
 
 **This is a known issue.**
 I've tried a couple of times to use it, but without success yet.
-At least it doesnt crash, but the convered .TTF file is not showing anything.
+At least it doesn't crash, but the converted .TTF file is not showing anything.
 
 1. ```bdf2ttf nitram-micro-mono-cp1252.ttf nitram-micro-mono.ttf.ini nitram-micro-mono-cp1252.bdf```
 
